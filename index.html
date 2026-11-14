@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#16834A" />
-    <title>Réact+ | Aide à la décision agricole · NASA Space Apps 2026</title>
+    <title>Récolte+ | Aide à la décision agricole · NASA Space Apps 2026</title>
     <!-- Thème choisi (ou thème du téléphone) appliqué avant l'affichage, pour éviter un flash blanc -->
     <script>
       try {
@@ -13,6 +13,7 @@
         document.documentElement.setAttribute("data-theme", t);
       } catch (e) {}
     </script>
+    <link rel="icon" href="images/logo-recolte.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -74,12 +75,12 @@
     <!-- Barre de navigation -->
     <header class="topbar">
       <div class="wrap topbar-in">
-        <a class="brand" href="#tableau-de-bord" aria-label="Réact+ : accueil">
-          <span class="brand-logo" aria-hidden="true"><svg class="ic"><use href="#i-sprout" /></svg></span>
-          <span class="brand-name">Réact<b>+</b></span>
+        <a class="brand" href="#tableau-de-bord" aria-label="Récolte+ : accueil">
+          <span class="brand-logo" aria-hidden="true"><img src="images/logo-recolte.png" alt="" width="40" height="40" /></span>
+          <span class="brand-name">Récolte<b>+</b></span>
         </a>
-        <div class="partner" title="Données ouvertes NASA. Réact+ n’est pas affilié officiellement à la NASA.">
-          <img src="images-removebg-preview.png" alt="Logo de la NASA" height="30" onerror="this.hidden=true;this.nextElementSibling.hidden=false" /><span class="partner-fb" hidden>NASA</span>
+        <div class="partner" title="Données ouvertes NASA. Récolte+ n’est pas affilié officiellement à la NASA.">
+          <img src="images/logo-nasa.png" alt="Logo de la NASA" height="30" onerror="this.hidden=true;this.nextElementSibling.hidden=false" /><span class="partner-fb" hidden>NASA</span>
           <span class="partner-txt">Données ouvertes</span>
         </div>
         <nav class="nav" aria-label="Navigation principale">
@@ -255,7 +256,7 @@
         <div class="section-head">
           <div>
             <h2 id="rot-title">Rotation des cultures : explorez 3 ans</h2>
-            <p class="note">Dites votre situation et vos priorités. Réact+ compare trois plans et explique chaque note.</p>
+            <p class="note">Dites votre situation et vos priorités. Récolte+ compare trois plans et explique chaque note.</p>
           </div>
           <span class="rot-flag">Notes indicatives · règles à faire valider par un agronome</span>
         </div>
@@ -442,7 +443,7 @@
     </main>
 
     <footer class="footer">
-      <div class="wrap">Sources : données ouvertes NASA (SMAP, GPM, POWER). Capteur et mesures de démonstration. Réact+ n’est pas affilié à la NASA.</div>
+      <div class="wrap">Sources : données ouvertes NASA (SMAP, GPM, POWER). Capteur et mesures de démonstration. Récolte+ n’est pas affilié à la NASA.</div>
     </footer>
 
     <!-- Assistant IA : interface complète (HTML + chat.css + chat.js). Le backend se branche dans chat.js, fonction appelerBackend(). -->
@@ -454,7 +455,7 @@
       <header class="chat-head">
         <span class="chat-avatar" aria-hidden="true"><svg class="ic"><use href="#i-sprout" /></svg></span>
         <div class="chat-head-txt">
-          <h2 id="chat-title">Assistant Réact+</h2>
+          <h2 id="chat-title">Assistant Récolte+</h2>
           <p id="chat-status"><i class="dot" aria-hidden="true"></i><span id="chat-status-txt">Mode démonstration</span></p>
         </div>
         <button id="chat-clear" class="chat-icon-btn" type="button" aria-label="Effacer la conversation" title="Effacer la conversation">
