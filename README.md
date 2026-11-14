@@ -27,3 +27,8 @@ Les couleurs se changent toutes dans `css/01-base.css` (`:root` et `:root[data-t
 
 ## Ordre des scripts (index.html)
 `config → donnees-demo → utils → graphiques → mesures → decisions → semaine → simple → nasa-power → main → carte → rotation-donnees → rotation → chat`
+
+## Images (domaine agricole)
+Déposer de vraies photos dans `images/` (format JPG, ~1600 px de large, moins de 400 Ko chacune) :
+`accueil.jpg` (grande image d'en-tête, optionnelle) · `champ-riz.jpg` · `irrigation.jpg` · `recolte.jpg`.
+Une photo manquante est masquée automatiquement. Sources libres : Wikimedia Commons, FAO Photo Library, Unsplash. Vérifier la licence et citer l'auteur si elle l'exige.
