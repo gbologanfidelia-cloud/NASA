@@ -2,7 +2,7 @@
 
 const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
   ? "http://localhost:3000"
-  : "https://votre-backend-render.onrender.com";
+  : "https://nasa-gus.onrender.com";
 
 window.chargerNasa = async function chargerNasa() {
   const netState = document.getElementById("net-state");
