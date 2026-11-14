@@ -1,8 +1,10 @@
 // js/nasa-power.js - Version corrigée et sécurisée globalement
 
+// js/nasa-power.js - Détection automatique de l'environnement
+// js/nasa-power.js - Détection automatique de l'environnement
 const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-  ? "http://localhost:3000"
-  : "https://votre-backend-render.onrender.com";
+  ? "http://localhost:3000"                              // Si vous testez sur votre PC
+  : "https://votre-backend-render.onrender.com";         // Remplacez par votre URL Render une fois déployé       // Remplacez par votre URL Render une fois déployé
 
 // Déclaration explicite et globale de la fonction attendue par main.js
 window.chargerNasa = async function chargerNasa() {
