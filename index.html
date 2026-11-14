@@ -130,6 +130,23 @@
           <li><svg class="ic"><use href="#i-pin" /></svg>Kara, Togo · Parcelle Alpha</li>
           <li id="sync-chip"><svg class="ic"><use href="#i-refresh" /></svg><span id="sync-label">Satellite : données de démonstration</span></li>
         </ul>
+
+        <!-- Photos du domaine : déposer de vraies photos dans le dossier images/ (voir README.md).
+             Une photo absente est simplement masquée, sans trou dans la page. -->
+        <div class="domaine" aria-label="Notre domaine : l’agriculture au Togo">
+          <figure>
+            <img src="images/champ-riz.jpg" alt="Champ de riz au Togo" loading="lazy" onerror="this.closest('figure').remove()" />
+            <figcaption>Riziculture</figcaption>
+          </figure>
+          <figure>
+            <img src="images/irrigation.jpg" alt="Irrigation d’une parcelle cultivée" loading="lazy" onerror="this.closest('figure').remove()" />
+            <figcaption>Gestion de l’eau</figcaption>
+          </figure>
+          <figure>
+            <img src="images/recolte.jpg" alt="Agriculteurs en train de récolter" loading="lazy" onerror="this.closest('figure').remove()" />
+            <figcaption>Cultures et récoltes</figcaption>
+          </figure>
+        </div>
       </section>
 
       <!-- Cartes statistiques : js/mesures.js remplit #reads (4 cartes) -->
