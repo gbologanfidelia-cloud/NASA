@@ -76,3 +76,53 @@
   object-fit: cover;
 }
 
+
+/* Photos du domaine (bandeau sous l'en-tête) */
+.domaine {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.domaine:not(:has(figure)) {
+  display: none;
+}
+.domaine figure {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r);
+  overflow: hidden;
+  background: var(--chip);
+  box-shadow: var(--shadow);
+}
+.domaine img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.domaine figcaption {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+@media (max-width: 640px) {
+  .domaine {
+    gap: 8px;
+  }
+  .domaine figure {
+    aspect-ratio: 4 / 5;
+  }
+  .domaine figcaption {
+    left: 6px;
+    bottom: 6px;
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+}
