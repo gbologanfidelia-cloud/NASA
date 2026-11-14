@@ -1,0 +1,284 @@
+/* ========== 5. PARCELLE ET SOURCES ========== */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+}
+.parcel-name {
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.parcel-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--mut);
+  font-size: 14px;
+}
+.parcel-location .ic {
+  width: 15px;
+  height: 15px;
+  color: var(--g);
+}
+.tag {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--g-l);
+  color: var(--g-d);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.map {
+  box-shadow: inset 0 0 0 0 transparent;
+  border-radius: 12px;
+  overflow: hidden;
+}
+#carte-secours svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: inherit;
+}
+.m-bg {
+  fill: var(--map-bg);
+}
+.m-cell {
+  fill: rgba(63, 110, 140, 0.06);
+  stroke: var(--sat);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+.m-ctx {
+  fill: var(--ctx);
+  stroke: var(--ctx-line);
+}
+.m-parcel {
+  fill: url(#rows);
+  stroke: var(--g);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+.m-row-bg {
+  fill: var(--field);
+}
+.m-row-line {
+  stroke: var(--g-s);
+  stroke-width: 1.4;
+}
+.m-dot {
+  fill: var(--g-d);
+  stroke: var(--card);
+  stroke-width: 2.5;
+}
+.ping {
+  fill: var(--g);
+  opacity: 0.35;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ping 2.4s ease-out infinite;
+}
+.m-leader {
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.m-tag {
+  fill: var(--card);
+  stroke: var(--line);
+}
+.m-lbl {
+  font-size: 13px;
+  fill: var(--ink);
+}
+.m-sub {
+  font-size: 11.5px;
+  fill: var(--mut);
+}
+.m-cap {
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--sat);
+}
+.m-north circle {
+  fill: var(--card);
+  stroke: var(--line);
+}
+.m-north path {
+  fill: var(--g-d);
+}
+.m-north text {
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--mut);
+}
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--mut);
+}
+.map-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sw {
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+  border-radius: 3px;
+}
+.sw-parcel {
+  background: var(--field);
+  border: 2px solid var(--g);
+}
+.sw-sensor {
+  width: 12px;
+  border-radius: 50%;
+  background: var(--g-d);
+}
+.sw-cell {
+  border: 1.5px dashed var(--sat);
+  background: rgba(63, 110, 140, 0.08);
+}
+.parcel .note {
+  margin-top: 10px;
+}
+.kv {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 18px;
+}
+.kv dt {
+  font-size: 12px;
+  color: var(--mut);
+}
+.kv dd {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.sources {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.src-list li {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  font-size: 13px;
+}
+.src-list li:first-child {
+  padding-top: 0;
+}
+.src-list b {
+  font-size: 14px;
+}
+.src-list span {
+  color: var(--mut);
+}
+.src-state {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--warn-l);
+  color: var(--warn-d);
+  font-size: 13px;
+}
+.src-state .dot {
+  margin-top: 6px;
+  background: var(--warn);
+}
+.src-state.live {
+  background: var(--g-l);
+  color: var(--g-d);
+}
+.src-state.live .dot {
+  background: var(--g);
+}
+
+/* ----- Carte Leaflet ----- */
+.carte-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.seg.seg-sm {
+  margin-bottom: 0;
+}
+.seg-btn {
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--mut);
+  font: 500 14px/1.2 "Inter", system-ui, sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.seg-btn:hover {
+  color: var(--ink);
+}
+.seg-btn.on {
+  background: var(--card);
+  color: var(--g-d);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(var(--sh), 0.12);
+}
+.carte-badge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--warn-l);
+  color: var(--warn-d);
+  font-size: 12px;
+  font-weight: 600;
+}
+#carte-parcelle {
+  height: 380px;
+  background: var(--map-bg);
+  font: inherit;
+}
+.leaflet-container {
+  font-family: inherit;
+}
+.capteur-pin {
+  background: none;
+  border: 0;
+}
+.capteur-dot,
+.capteur-ping {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+}
+.capteur-dot {
+  background: #105c37;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+.capteur-ping {
+  background: #16834a;
+  opacity: 0.5;
+  animation: ping 2.4s ease-out infinite;
+}
+.leaflet-tooltip {
+  font: 600 12px "Inter", system-ui, sans-serif;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: var(--shadow-up);
+}
+

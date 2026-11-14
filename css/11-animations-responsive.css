@@ -1,0 +1,396 @@
+/* ========== 8. ANIMATIONS ET RESPONSIVE ========== */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(22, 131, 74, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(22, 131, 74, 0);
+  }
+}
+@keyframes ping {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ----- Responsive : du plus large au plus étroit ----- */
+
+/* Très grands écrans */
+@media (min-width: 1536px) {
+  .wrap {
+    max-width: 1360px;
+  }
+}
+
+/* Portables : la navigation passe sur une seconde ligne avant de déborder */
+@media (max-width: 1700px) {
+  .partner-txt {
+    display: none;
+  }
+}
+@media (max-width: 1420px) {
+  .topbar-in {
+    flex-wrap: wrap;
+    height: auto;
+    gap: 0 12px;
+    padding-top: 10px;
+  }
+  .nav {
+    order: 3;
+    flex: 1 0 100%;
+    overflow-x: auto;
+    padding: 6px 0 8px;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+  .topbar-end {
+    padding-bottom: 10px;
+  }
+  .brand,
+  .partner {
+    padding-bottom: 10px;
+  }
+  .partner::before {
+    margin-top: -18px;
+  }
+  html {
+    scroll-padding-top: 120px;
+  }
+}
+
+/* Tablettes et petits portables */
+@media (max-width: 1100px) {
+  .rot-chart text {
+    font-size: 15px;
+  }
+  .week-days {
+    grid-template-columns: repeat(7, minmax(104px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scroll-snap-type: x proximity;
+  }
+  .wd {
+    scroll-snap-align: start;
+  }
+  .week-kpis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-top.has-visual {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .hero-visual {
+    aspect-ratio: 21 / 9;
+  }
+  .split,
+  .reco-grid {
+    grid-template-columns: 1fr;
+  }
+  .sim-card {
+    position: static;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* Les textes des graphiques gardent une taille lisible quand le SVG se réduit */
+  .plot svg text {
+    font-size: 15px;
+  }
+  #carte-secours svg text {
+    font-size: 15px;
+  }
+  #carte-secours svg .m-sub {
+    font-size: 13px;
+  }
+  .section-head {
+    justify-content: flex-start;
+  }
+}
+
+/* Grands téléphones, petites tablettes */
+@media (max-width: 1100px) {
+  .simple-list {
+    grid-template-columns: 1fr;
+  }
+  .simple-row {
+    grid-template-columns: auto 1fr auto;
+  }
+  .simple-pill {
+    grid-column: auto;
+    margin-top: 0;
+  }
+}
+@media (max-width: 760px) {
+  .rot-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px;
+  }
+  .rot-years {
+    flex-direction: column;
+  }
+  .rot-arrow {
+    transform: rotate(90deg);
+    align-self: center;
+    line-height: 0.6;
+  }
+  .rot-facts {
+    grid-template-columns: 1fr;
+  }
+  .rot-chart text {
+    font-size: 19px;
+  }
+  .rot-best {
+    margin-left: 0;
+  }
+  #carte-parcelle {
+    height: 300px;
+  }
+  .seg.seg-sm {
+    width: 100%;
+  }
+  .seg-btn {
+    flex: 1;
+    padding: 9px 8px;
+  }
+  .simple-row {
+    grid-template-columns: auto 1fr;
+  }
+  .simple-pill {
+    grid-column: 1 / -1;
+    margin-top: 6px;
+  }
+  .week-advice {
+    grid-template-columns: 1fr;
+  }
+  .hero-visual {
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+  }
+  .wrap {
+    padding: 0 16px;
+  }
+  main.wrap {
+    gap: 16px;
+  }
+  .hero {
+    padding-top: 20px;
+  }
+  .card {
+    padding: 18px;
+  }
+  .card-head {
+    flex-direction: column;
+  }
+  .live-box {
+    align-items: stretch;
+    width: 100%;
+  }
+  .btn {
+    justify-content: center;
+  }
+  #msg {
+    text-align: left;
+  }
+  .kv {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stats {
+    grid-template-columns: 1fr;
+  }
+  .seg {
+    display: flex;
+    width: 100%;
+  }
+  .seg label {
+    flex: 1;
+    text-align: center;
+    padding: 9px 8px;
+  }
+  .plot svg text {
+    font-size: 19px;
+  }
+  #carte-secours svg text {
+    font-size: 18px;
+  }
+  #carte-secours svg .m-sub {
+    font-size: 15px;
+  }
+  .alert-header {
+    flex-wrap: wrap;
+  }
+  .alert-head-txt {
+    flex: 1;
+  }
+  .alert-action {
+    font-size: 18px;
+  }
+  .footer {
+    padding-bottom: 96px; /* laisse la place au bouton de l'assistant */
+  }
+}
+
+/* Téléphones */
+@media (max-width: 480px) {
+  .rot-chart text {
+    font-size: 25px;
+  }
+  .rot-score {
+    grid-template-columns: 96px 1fr 26px;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Sur téléphone, la pastille de connexion ne garde que son point (le texte reste lu par les lecteurs d'écran) */
+  .conn #net-state {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .conn {
+    padding: 11px;
+  }
+  .stat-top {
+    flex-wrap: wrap;
+  }
+  .chips li {
+    white-space: normal;
+  }
+  .plot svg text {
+    font-size: 25px;
+  }
+  #carte-secours svg text {
+    font-size: 21px;
+  }
+  #carte-secours svg .m-sub,
+  #carte-secours svg .m-cap {
+    display: none;
+  }
+  #carte-secours svg .m-lbl {
+    font-size: 20px;
+  }
+  .gl {
+    font-size: 11px;
+  }
+  .tip {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+}
+
+/* Très petits écrans (320 px) */
+@media (max-width: 360px) {
+  .wrap {
+    padding: 0 12px;
+  }
+  .card,
+  .stat-card {
+    padding: 14px;
+  }
+  .stat-value {
+    font-size: 30px;
+  }
+  .parcel-name {
+    font-size: 19px;
+  }
+  .section-head h2 {
+    font-size: 19px;
+  }
+}
+
+/* Écrans tactiles : cibles plus grandes, le défilement vertical reste possible sur les graphiques */
+@media (pointer: coarse) {
+  .nav a {
+    padding: 11px 14px;
+  }
+  .seg label {
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+  .sim input[type="range"] {
+    height: 8px;
+  }
+  .sim input[type="range"]::-webkit-slider-thumb {
+    width: 26px;
+    height: 26px;
+  }
+  .sim input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+  }
+  .sim .chk {
+    padding: 14px;
+  }
+  .plot svg.main {
+    touch-action: pan-y;
+  }
+}
+
+/* Paysage sur téléphone : la barre ne reste pas collée et ne mange pas l'écran */
+@media (max-height: 480px) and (orientation: landscape) {
+  .topbar {
+    position: static;
+  }
+  .sim-card {
+    position: static;
+  }
+}
+
+/* Titres fluides */
+.hero h1 {
+  font-size: clamp(25px, 3.2vw + 12px, 34px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

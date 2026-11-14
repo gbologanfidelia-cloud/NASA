@@ -1,0 +1,228 @@
+/* ========== 6. ANALYSES ========== */
+#analyses .card-head {
+  margin-bottom: 20px;
+}
+.wrapable {
+  flex-wrap: wrap;
+}
+#analyses .card-title {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 16px;
+  color: var(--ink);
+}
+#analyses .note {
+  margin-top: 4px;
+}
+.live-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  max-width: 100%;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--g-btn);
+  color: #fff;
+  font: 600 14px/1.2 "Inter", system-ui, sans-serif;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn:hover:not(:disabled) {
+  background: var(--g-hover);
+}
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.btn:disabled {
+  opacity: 0.75;
+  cursor: progress;
+}
+.btn:disabled .ic {
+  animation: spin 0.9s linear infinite;
+}
+#msg {
+  text-align: right;
+  max-width: 420px;
+}
+
+/* Radios invisibles mais accessibles */
+.v {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.seg {
+  display: inline-flex;
+  padding: 4px;
+  gap: 4px;
+  background: var(--track-2);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.seg label {
+  padding: 8px 16px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mut);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.seg label:hover {
+  color: var(--ink);
+}
+#m-hum:checked ~ .seg label[for="m-hum"],
+#m-temp:checked ~ .seg label[for="m-temp"],
+#m-rain:checked ~ .seg label[for="m-rain"] {
+  background: var(--card);
+  color: var(--g-d);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(var(--sh), 0.12);
+}
+#m-hum:focus-visible ~ .seg label[for="m-hum"],
+#m-temp:focus-visible ~ .seg label[for="m-temp"],
+#m-rain:focus-visible ~ .seg label[for="m-rain"] {
+  outline: 2px solid var(--g);
+  outline-offset: 1px;
+}
+
+.chart {
+  display: none;
+}
+#m-hum:checked ~ .charts .c-hum,
+#m-temp:checked ~ .charts .c-temp,
+#m-rain:checked ~ .charts .c-rain {
+  display: block;
+  animation: fadeUp 0.4s var(--ease);
+}
+.charts {
+  position: relative;
+  transition: opacity 0.3s;
+}
+.charts.is-loading {
+  opacity: 0.45;
+  pointer-events: none;
+}
+.charts.is-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(100deg, transparent 30%, rgba(22, 131, 74, 0.1) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--mut);
+}
+.legend .k {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.legend .k::before {
+  content: "";
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
+}
+.legend .s::before {
+  background: var(--g);
+}
+.legend .g::before {
+  background: var(--sat);
+}
+.legend .h::before {
+  height: 12px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(45deg, rgba(63, 110, 140, 0.18) 0 3px, rgba(0, 0, 0, 0.35) 3px 4px);
+}
+.plot {
+  position: relative;
+}
+.plot svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: inherit;
+}
+.plot svg text {
+  font-size: 12px;
+  fill: var(--mut);
+}
+.plot svg.main {
+  cursor: crosshair;
+}
+.plot .cur {
+  stroke: var(--mut);
+  stroke-dasharray: 3 3;
+}
+.tip {
+  display: none;
+  position: absolute;
+  top: 8px;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: var(--tip-bg);
+  color: var(--tip-fg);
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: var(--shadow-up);
+  z-index: 2;
+}
+.cap {
+  margin: 14px 0 4px;
+  font-size: 13px;
+  color: var(--mut);
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+.stats > div {
+  padding: 14px 16px;
+  background: var(--bg);
+  border-radius: 10px;
+}
+.stats dt {
+  font-size: 12px;
+  color: var(--mut);
+}
+.stats dd {
+  margin-top: 2px;
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.read {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--g-l);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--g-d);
+}
+

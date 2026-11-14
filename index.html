@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#16834A" />
+    <title>Réact+ | Aide à la décision agricole · NASA Space Apps 2026</title>
+    <!-- Thème choisi (ou thème du téléphone) appliqué avant l'affichage, pour éviter un flash blanc -->
+    <script>
+      try {
+        var t = localStorage.getItem("reactplus-theme");
+        if (t !== "dark" && t !== "light") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="css/01-base.css" />
+    <link rel="stylesheet" href="css/02-navigation.css" />
+    <link rel="stylesheet" href="css/03-accueil.css" />
+    <link rel="stylesheet" href="css/04-mesures.css" />
+    <link rel="stylesheet" href="css/05-parcelle-sources.css" />
+    <link rel="stylesheet" href="css/06-analyses.css" />
+    <link rel="stylesheet" href="css/07-rotation.css" />
+    <link rel="stylesheet" href="css/08-simple.css" />
+    <link rel="stylesheet" href="css/09-semaine.css" />
+    <link rel="stylesheet" href="css/10-recommandations.css" />
+    <link rel="stylesheet" href="css/11-animations-responsive.css" />
+    <link rel="stylesheet" href="css/12-chat.css" />
+  </head>
+  <body>
+    <!-- Icônes réutilisées partout via <use href="#i-…"> (aussi par js/*.js) -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.2 6 10.5A6 6 0 0 1 6 13.5C6 9.2 12 3 12 3z" /></symbol>
+        <symbol id="i-thermo" viewBox="0 0 24 24"><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z" /></symbol>
+        <symbol id="i-rain" viewBox="0 0 24 24">
+          <path d="M7 15a4 4 0 0 1-.6-7.96A5.5 5.5 0 0 1 17 7a4.5 4.5 0 0 1 .5 8" /><path d="M8 18v3M12 17v3M16 18v3" />
+        </symbol>
+        <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14z" /><path d="M5 19c3-5 6-7 10-9" /></symbol>
+        <symbol id="i-sprout" viewBox="0 0 24 24">
+          <path d="M12 21v-9" /><path d="M12 12c0-4 3-6 7-6 0 4-3 6-7 6z" /><path d="M12 15c0-3-2-5-6-5 0 3 2 5 6 5z" />
+        </symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24">
+          <path d="M20 11a8 8 0 0 0-14-4M4 5v4h4" /><path d="M4 13a8 8 0 0 0 14 4M20 19v-4h-4" />
+        </symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z" /><circle cx="12" cy="10" r="2.5" /></symbol>
+        <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /></symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></symbol>
+        <symbol id="i-chip" viewBox="0 0 24 24">
+          <rect x="6" y="6" width="12" height="12" rx="2" /><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" />
+        </symbol>
+        <symbol id="i-sliders" viewBox="0 0 24 24">
+          <path d="M4 6h8M18 6h2M4 12h2M12 12h8M4 18h10M20 18h0" /><circle cx="15" cy="6" r="2" /><circle cx="9" cy="12" r="2" /><circle cx="17" cy="18" r="2" />
+        </symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></symbol>
+        <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6" /></symbol>
+        <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6" /></symbol>
+        <symbol id="i-flat" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol>
+        <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9.5h4l5-4v13l-5-4H4z" /><path d="M16.5 9a4 4 0 0 1 0 6M18.8 6.5a7.5 7.5 0 0 1 0 11" /></symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6L7 7M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4" /></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" /></symbol>
+        <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" /><path d="M8 9.5h8M8 12.5h5" /></symbol>
+        <symbol id="i-send" viewBox="0 0 24 24"><path d="M5 12l15-8-5 17-3-7z" /><path d="M12 14l8-10" /></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></symbol>
+        <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13" /></symbol>
+      </defs>
+    </svg>
+
+    <a class="skip" href="#contenu">Aller au contenu</a>
+
+    <!-- Barre de navigation -->
+    <header class="topbar">
+      <div class="wrap topbar-in">
+        <a class="brand" href="#tableau-de-bord" aria-label="Réact+ : accueil">
+          <span class="brand-logo" aria-hidden="true"><svg class="ic"><use href="#i-sprout" /></svg></span>
+          <span class="brand-name">Réact<b>+</b></span>
+        </a>
+        <div class="partner" title="Données ouvertes NASA. Réact+ n’est pas affilié officiellement à la NASA.">
+          <img src="images-removebg-preview.png" alt="Logo de la NASA" height="30" onerror="this.hidden=true;this.nextElementSibling.hidden=false" /><span class="partner-fb" hidden>NASA</span>
+          <span class="partner-txt">Données ouvertes</span>
+        </div>
+        <nav class="nav" aria-label="Navigation principale">
+          <a href="#tableau-de-bord" class="on">Tableau de bord</a>
+          <a href="#parcelles">Mes parcelles</a>
+          <a href="#satellite">Données satellitaires</a>
+          <a href="#rotation">Rotation</a>
+          <a href="#analyses">Analyses</a>
+          <a href="#semaine">Conseils</a>
+          <a href="#recommandations">Recommandations</a>
+        </nav>
+        <div class="topbar-end">
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Passer en mode sombre" title="Mode sombre">
+            <svg class="ic sun" aria-hidden="true"><use href="#i-sun" /></svg><svg class="ic moon" aria-hidden="true"><use href="#i-moon" /></svg>
+          </button>
+          <span class="conn" id="net-pill" title="État de la source satellitaire">
+            <i class="dot" aria-hidden="true"></i><span id="net-state">Mode démonstration</span>
+          </span>
+          <span class="avatar" role="img" aria-label="Profil utilisateur"><svg class="ic"><use href="#i-user" /></svg></span>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenu" class="wrap">
+      <!-- Accueil du tableau de bord -->
+      <section class="hero reveal" id="tableau-de-bord">
+        <div class="hero-top">
+          <div class="hero-text">
+            <h1>Tableau de bord agricole</h1>
+            <p class="lead">
+              Surveillez vos cultures et prenez de meilleures décisions grâce aux données satellitaires et aux capteurs
+              intelligents.
+            </p>
+          </div>
+
+          <!-- Image d'accueil : déposer une vraie photo dans images/accueil.jpg (16/9, ~1600 px). Sans photo, l'en-tête reste texte seul. -->
+          <figure class="hero-visual" hidden>
+            <img
+              src="images/accueil.jpg"
+              alt="Parcelle agricole au Togo"
+              onload="this.parentNode.hidden=false;this.closest('.hero-top').classList.add('has-visual')"
+              onerror="this.parentNode.remove()"
+            />
+          </figure>
+        </div>
+        <ul class="chips" aria-label="Informations de contexte">
+          <li><svg class="ic"><use href="#i-calendar" /></svg><span id="today">—</span></li>
+          <li><svg class="ic"><use href="#i-pin" /></svg>Kara, Togo · Parcelle Alpha</li>
+          <li id="sync-chip"><svg class="ic"><use href="#i-refresh" /></svg><span id="sync-label">Satellite : données de démonstration</span></li>
+        </ul>
+      </section>
+
+      <!-- Cartes statistiques : js/mesures.js remplit #reads (4 cartes) -->
+      <section aria-label="Dernières mesures">
+        <div class="stats-grid reveal" id="reads"></div>
+      </section>
+
+      <!-- En mots simples : dernière mesure du jour expliquée en français facile (js/simple.js, afficherSimple) -->
+      <section class="card reveal" id="simple" aria-labelledby="simple-title">
+        <div class="card-head wrapable">
+          <div>
+            <h2 class="card-title" id="simple-title">Aujourd’hui, en mots simples</h2>
+            <p class="note" id="simple-sub"></p>
+          </div>
+          <button id="simple-listen" class="btn btn-soft" type="button" hidden>
+            <svg class="ic"><use href="#i-sound" /></svg><span>Écouter</span>
+          </button>
+        </div>
+        <ul class="simple-list" id="simple-list"></ul>
+        <div class="simple-todo" id="simple-todo"></div>
+      </section>
+
+      <!-- Parcelle + sources de données -->
+      <section class="split reveal" id="parcelles">
+        <article class="card parcel">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title">Parcelle active</h2>
+              <p class="parcel-name">Parcelle Alpha — Riz</p>
+              <p class="parcel-location"><svg class="ic"><use href="#i-pin" /></svg>Région de Kara, Togo</p>
+            </div>
+            <span class="tag">Croissance (J+42)</span>
+          </div>
+
+          <!-- Carte Leaflet (carte.js). Le schéma SVG ci-dessous sert de secours si Leaflet ne se charge pas. -->
+          <div class="carte-bar">
+            <div class="seg seg-sm" role="group" aria-label="Vue de la carte">
+              <button type="button" id="carte-vue-parcelle" class="seg-btn on" aria-pressed="true">Ma parcelle</button>
+              <button type="button" id="carte-vue-maille" class="seg-btn" aria-pressed="false">Maille satellite</button>
+            </div>
+            <span class="carte-badge" id="carte-badge">Position de démonstration</span>
+          </div>
+          <div class="map" id="carte-zone">
+            <div id="carte-parcelle" role="region" aria-label="Carte satellite de la parcelle"></div>
+          </div>
+          <div class="map" id="carte-secours" hidden>
+            <svg viewBox="0 0 640 340" role="img" aria-label="Schéma d’une parcelle de riz et de son capteur IoT dans une maille satellite">
+              <defs>
+                <pattern id="rows" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)">
+                  <rect class="m-row-bg" width="9" height="9" />
+                  <line class="m-row-line" y2="9" />
+                </pattern>
+              </defs>
+              <rect class="m-bg" x="0" y="0" width="640" height="340" />
+              <rect class="m-cell" x="22" y="22" width="596" height="296" rx="10" />
+              <polygon class="m-ctx" points="44,60 180,48 196,150 56,164" />
+              <polygon class="m-ctx" points="440,50 596,64 584,150 452,140" />
+              <polygon class="m-ctx" points="60,206 190,200 206,292 76,298" />
+              <polygon class="m-ctx" points="470,200 592,196 598,290 480,296" />
+              <text class="m-cap" x="40" y="44">Maille satellite (une seule valeur pour toute la zone)</text>
+              <polygon class="m-parcel" points="236,112 392,90 414,214 256,242" />
+              <circle class="ping" cx="326" cy="166" r="9" />
+              <circle class="m-dot" cx="326" cy="166" r="8" />
+              <line class="m-leader" x1="336" y1="160" x2="432" y2="124" />
+              <rect class="m-tag" x="432" y="104" width="138" height="40" rx="8" />
+              <text class="m-lbl" x="446" y="121" font-weight="600">Capteur IoT</text>
+              <text class="m-sub" x="446" y="136">Mesure la parcelle</text>
+              <text class="m-lbl" x="256" y="266" font-weight="600">Parcelle Alpha · 1,2 ha</text>
+              <g class="m-north" transform="translate(588 54)">
+                <circle r="14" />
+                <path d="M0 -8 L4 4 L0 1 L-4 4 Z" />
+                <text y="-19" text-anchor="middle">N</text>
+              </g>
+            </svg>
+          </div>
+          <ul class="map-legend" aria-label="Légende du schéma">
+            <li><i class="sw sw-parcel"></i>Parcelle de riz</li>
+            <li><i class="sw sw-sensor"></i>Capteur IoT</li>
+            <li><i class="sw sw-cell"></i>Zone couverte par le satellite</li>
+          </ul>
+          <p class="note" id="carte-note">Le satellite voit une maille entière. Le capteur voit votre parcelle.</p>
+
+          <dl class="kv">
+            <div><dt>Culture</dt><dd>Riz</dd></div>
+            <div><dt>Superficie</dt><dd>1,2 ha</dd></div>
+            <div><dt>Stade</dt><dd>J+42</dd></div>
+          </dl>
+        </article>
+
+        <!-- Zone réservée aux sources satellitaires -->
+        <aside class="card sources" id="satellite" aria-labelledby="src-title">
+          <h2 class="card-title" id="src-title">Sources satellitaires</h2>
+          <ul class="src-list">
+            <li><b>SMAP</b><span>Humidité du sol</span></li>
+            <li><b>GPM</b><span>Précipitations</span></li>
+            <li><b>POWER</b><span>Température, pluie, humidité de surface</span></li>
+          </ul>
+          <p class="src-state" id="src-state">
+            <i class="dot" aria-hidden="true"></i><span id="src-state-txt">Valeurs affichées : démonstration. Chargez NASA POWER pour des données réelles.</span>
+          </p>
+        </aside>
+      </section>
+
+      <!-- Rotation des cultures : rotation.js calcule 3 plans sur 3 ans à partir de la situation de l'agriculteur -->
+      <section class="reveal" id="rotation" aria-labelledby="rot-title">
+        <div class="section-head">
+          <div>
+            <h2 id="rot-title">Rotation des cultures : explorez 3 ans</h2>
+            <p class="note">Dites votre situation et vos priorités. Réact+ compare trois plans et explique chaque note.</p>
+          </div>
+          <span class="rot-flag">Notes indicatives · règles à faire valider par un agronome</span>
+        </div>
+
+        <div class="reco-grid">
+          <aside class="card sim-card">
+            <h3 class="card-title"><svg class="ic"><use href="#i-sprout" /></svg>Votre situation</h3>
+            <form id="rot-form" class="sim rot-form" onsubmit="return false">
+              <label>Culture de cette saison<select id="rot-culture"></select></label>
+              <label>Depuis combien de saisons la même culture ?
+                <select id="rot-repet">
+                  <option value="1">1 saison</option>
+                  <option value="2">2 saisons</option>
+                  <option value="3">3 saisons ou plus</option>
+                </select>
+              </label>
+              <label>Type de sol<select id="rot-sol"></select></label>
+              <label>État de la terre
+                <select id="rot-fertilite">
+                  <option value="bon">Bonne (récoltes bonnes)</option>
+                  <option value="moyen" selected>Moyenne</option>
+                  <option value="appauvri">Fatiguée (récoltes en baisse)</option>
+                </select>
+              </label>
+              <fieldset class="rot-fs">
+                <legend>Cultures que vous pouvez faire</legend>
+                <div id="rot-cultures" class="rot-chks"></div>
+              </fieldset>
+              <fieldset class="rot-fs">
+                <legend>Ce qui compte pour vous</legend>
+                <label><span class="sim-row"><span>Santé du sol</span><output id="rot-p-sol-o"></output></span><input id="rot-p-sol" type="range" min="0" max="2" step="1" value="2" /></label>
+                <label><span class="sim-row"><span>Économiser l’eau</span><output id="rot-p-eau-o"></output></span><input id="rot-p-eau" type="range" min="0" max="2" step="1" value="1" /></label>
+                <label><span class="sim-row"><span>Gagner de l’argent</span><output id="rot-p-revenu-o"></output></span><input id="rot-p-revenu" type="range" min="0" max="2" step="1" value="1" /></label>
+                <label><span class="sim-row"><span>Résister à la sécheresse</span><output id="rot-p-res-o"></output></span><input id="rot-p-res" type="range" min="0" max="2" step="1" value="1" /></label>
+              </fieldset>
+            </form>
+          </aside>
+
+          <div class="rot-col">
+            <article class="card">
+              <div class="card-head wrapable">
+                <div>
+                  <h3 class="card-title">Le climat de votre zone</h3>
+                  <p class="note">Historique NASA POWER sur 20 ans : vraies données, chargées à la demande.</p>
+                </div>
+                <div class="live-box">
+                  <button id="rot-load" class="btn btn-soft" type="button"><svg class="ic"><use href="#i-refresh" /></svg>Charger l’historique NASA</button>
+                  <span id="rot-climat-msg" class="note" role="status" aria-live="polite"></span>
+                </div>
+              </div>
+              <div id="rot-climat"></div>
+            </article>
+
+            <p id="rot-erreur" class="rot-erreur" role="alert" hidden>Choisissez au moins 3 cultures pour comparer des plans.</p>
+            <div id="rot-resultats-bloc">
+              <p id="rot-reco" class="rot-reco" aria-live="polite"></p>
+              <div id="rot-results" class="rot-plans"></div>
+              <p id="rot-base" class="rot-base"></p>
+              <details class="rot-details">
+                <summary>Comment sont calculées les notes ?</summary>
+                <div class="rot-explain">
+                  <ul>
+                    <li><b>Santé du sol</b> : on part de l’état de votre terre, puis on ajoute l’effet de chaque culture sur l’azote (les légumineuses en rendent, les céréales en prennent). On compte un bonus si une culture suit une légumineuse et si les familles varient, et une pénalité si la même famille revient.</li>
+                    <li><b>Économie d’eau</b> : plus le besoin en eau moyen des 3 cultures est faible, plus la note monte. La pénalité grandit si votre sol est sableux, si les pluies de la NASA sont faibles, irrégulières ou en baisse.</li>
+                    <li><b>Revenu</b> : moyenne du revenu relatif des cultures. C’est un classement entre ces cultures, pas un prix : ajustez-le avec les prix de votre marché.</li>
+                    <li><b>Résilience</b> : résistance moyenne à la sécheresse, plus un bonus pour la variété des cultures.</li>
+                    <li><b>Note pour vos priorités</b> : moyenne des 4 notes, pondérée par ce que vous avez jugé important. Une terre fatiguée donne plus de poids au sol.</li>
+                  </ul>
+                  <p class="note">Les valeurs ci-dessous sont des classes de 1 à 5 issues de connaissances agronomiques générales sur les cultures tropicales.</p>
+                  <div class="table-wrap"><table id="rot-table" class="rot-table"></table></div>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analyses : graphiques capteur / satellite -->
+      <section class="card reveal" id="analyses">
+        <div class="card-head wrapable">
+          <div>
+            <h2 class="card-title">Comparaison capteur local et satellite NASA (14 jours)</h2>
+            <p class="note" id="sub"></p>
+          </div>
+          <div class="live-box">
+            <button id="live" class="btn" type="button">
+              <svg class="ic"><use href="#i-refresh" /></svg>Charger les données NASA POWER en direct</button
+            ><span id="msg" class="note" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <!-- Les radios restent accessibles au clavier ; css/06-analyses.css les masque et active le label correspondant -->
+        <input class="v" type="radio" name="m" id="m-hum" aria-label="Humidité du sol" checked />
+        <input class="v" type="radio" name="m" id="m-temp" aria-label="Température" />
+        <input class="v" type="radio" name="m" id="m-rain" aria-label="Pluie" />
+        <div class="seg">
+          <label for="m-hum">Humidité du sol</label><label for="m-temp">Température</label
+          ><label for="m-rain">Pluie</label>
+        </div>
+        <div class="charts" id="charts"></div>
+      </section>
+
+      <!-- Conseils de la semaine : js/semaine.js (afficherSemaine) les calcule à partir des 7 derniers jours -->
+      <section class="card reveal" id="semaine" aria-labelledby="week-title">
+        <div class="card-head wrapable">
+          <div>
+            <h2 class="card-title" id="week-title">Conseils de la semaine</h2>
+            <p class="note" id="week-sub"></p>
+          </div>
+          <button id="week-ask" class="btn btn-soft" type="button">
+            <svg class="ic"><use href="#i-chat" /></svg>Poser une question à l’assistant
+          </button>
+        </div>
+        <div class="week-days" id="week-days" role="list" aria-label="Les 7 derniers jours"></div>
+        <dl class="week-kpis" id="week-kpis"></dl>
+        <div class="week-advice" id="week-advice"></div>
+      </section>
+
+      <!-- Recommandations + simulateur -->
+      <section class="reco reveal" id="recommandations">
+        <div class="section-head">
+          <h2>Recommandations agricoles</h2>
+          <p class="note">Moteur à règles explicables · décisions prioritaires sur 48 h</p>
+        </div>
+
+        <div class="reco-grid">
+          <aside class="card sim-card">
+            <h3 class="card-title"><svg class="ic"><use href="#i-sliders" /></svg>Simulateur agricole</h3>
+            <p class="note">Modifiez les conditions : les recommandations se mettent à jour immédiatement.</p>
+            <div class="sim">
+              <label
+                ><span class="sim-row"><span>Humidité du sol</span><output id="o-sol"></output></span
+                ><input id="in-sol" type="range" min="30" max="100" step="1"
+              /></label>
+              <label
+                ><span class="sim-row"><span>Température</span><output id="o-t"></output></span
+                ><input id="in-t" type="range" min="25" max="40" step="0.1"
+              /></label>
+              <label class="chk"><input id="in-pl" type="checkbox" checked /><span>Pluie annoncée demain</span></label>
+            </div>
+          </aside>
+
+          <div class="alerts">
+            <article class="alert-card" id="a-irr">
+              <div class="alert-header">
+                <span class="alert-ic"><svg class="ic"><use href="#i-drop" /></svg></span>
+                <span class="alert-head-txt"><span class="alert-type">Gestion de l’irrigation</span><span class="alert-time">Prochaines 24 h</span></span>
+                <span class="prio"></span>
+              </div>
+              <div class="alert-action" id="dd"></div>
+              <div class="gauge"><i id="g1"></i><b style="left: 70%"></b></div>
+              <div class="gl"><span>0 %</span><span>Seuil riz 70 %</span><span>100 %</span></div>
+              <ul class="why" id="why"></ul>
+              <div class="alert-reason" id="rule"></div>
+            </article>
+
+            <article class="alert-card warning" id="a-st">
+              <div class="alert-header">
+                <span class="alert-ic"><svg class="ic"><use href="#i-thermo" /></svg></span>
+                <span class="alert-head-txt"><span class="alert-type">Surveillance du stress thermique</span><span class="alert-time">Sous 48 h</span></span>
+                <span class="prio"></span>
+              </div>
+              <div class="alert-action" id="h-st"></div>
+              <div class="gauge"><i id="g2"></i><b style="left: 75%"></b></div>
+              <div class="gl"><span>20 °C</span><span>Seuil riz 35 °C</span><span>40 °C</span></div>
+              <div class="alert-reason" id="p-st"></div>
+            </article>
+
+            <article class="alert-card info">
+              <div class="alert-header">
+                <span class="alert-ic"><svg class="ic"><use href="#i-sprout" /></svg></span>
+                <span class="alert-head-txt"><span class="alert-type">Rotation des cultures</span><span class="alert-time">Prochaine saison</span></span>
+                <span class="prio"></span>
+              </div>
+              <div class="alert-action" id="rot-mini-action">Riz, puis soja.</div>
+              <div class="alert-reason" id="rot-mini-reason">
+                <b>Plan de cultures :</b> le soja fixe l’azote et prépare le sol. Autres cultures prévues : maïs, sorgho,
+                tomate, igname, manioc.
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">Sources : données ouvertes NASA (SMAP, GPM, POWER). Capteur et mesures de démonstration. Réact+ n’est pas affilié à la NASA.</div>
+    </footer>
+
+    <!-- Assistant IA : interface complète (HTML + chat.css + chat.js). Le backend se branche dans chat.js, fonction appelerBackend(). -->
+    <button id="chat-open" class="chat-fab" type="button" aria-haspopup="dialog" aria-controls="chat-panel">
+      <svg class="ic" aria-hidden="true"><use href="#i-chat" /></svg><span>Poser une question</span>
+    </button>
+
+    <section id="chat-panel" class="chat" role="dialog" aria-modal="false" aria-labelledby="chat-title" hidden>
+      <header class="chat-head">
+        <span class="chat-avatar" aria-hidden="true"><svg class="ic"><use href="#i-sprout" /></svg></span>
+        <div class="chat-head-txt">
+          <h2 id="chat-title">Assistant Réact+</h2>
+          <p id="chat-status"><i class="dot" aria-hidden="true"></i><span id="chat-status-txt">Mode démonstration</span></p>
+        </div>
+        <button id="chat-clear" class="chat-icon-btn" type="button" aria-label="Effacer la conversation" title="Effacer la conversation">
+          <svg class="ic"><use href="#i-trash" /></svg>
+        </button>
+        <button id="chat-close" class="chat-icon-btn" type="button" aria-label="Fermer l’assistant" title="Fermer">
+          <svg class="ic"><use href="#i-close" /></svg>
+        </button>
+      </header>
+
+      <div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-relevant="additions">
+        <div class="chat-welcome" id="chat-welcome">
+          <p class="chat-welcome-title">Bonjour, comment puis-je vous aider ?</p>
+          <p class="note">Posez une question sur l’irrigation, la chaleur, les cultures ou vos données. L’assistant tient compte de votre parcelle.</p>
+          <div class="chat-suggest" id="chat-suggest">
+            <button type="button" class="chip-btn">Dois-je irriguer demain ?</button>
+            <button type="button" class="chip-btn">Que signifie l’écart entre capteur et satellite ?</button>
+            <button type="button" class="chip-btn">Quelle culture après le riz ?</button>
+            <button type="button" class="chip-btn">Comment protéger le riz de la chaleur ?</button>
+          </div>
+        </div>
+      </div>
+
+      <p id="chat-ctx" class="chat-ctx" title="Contexte envoyé avec votre question"></p>
+
+      <form id="chat-form" class="chat-form" autocomplete="off">
+        <label for="chat-input" class="sr-only">Votre question</label>
+        <textarea id="chat-input" rows="1" maxlength="1000" placeholder="Écrivez votre question…"></textarea>
+        <button id="chat-send" class="chat-send" type="submit" aria-label="Envoyer" disabled>
+          <svg class="ic"><use href="#i-send" /></svg>
+        </button>
+      </form>
+      <p class="chat-foot">Les réponses de l’IA peuvent être inexactes. Vérifiez avant toute décision importante.</p>
+    </section>
+
+    <script src="vendor/leaflet/leaflet.js"></script>
+    <!-- Ordre important : configuration et données d'abord, démarrage (main.js) en dernier de l'application -->
+    <script src="js/config.js"></script>
+    <script src="js/donnees-demo.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/graphiques.js"></script>
+    <script src="js/mesures.js"></script>
+    <script src="js/decisions.js"></script>
+    <script src="js/semaine.js"></script>
+    <script src="js/simple.js"></script>
+    <script src="js/nasa-power.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/carte.js"></script>
+    <script src="js/rotation-donnees.js"></script>
+    <script src="js/rotation.js"></script>
+    <script src="js/chat.js"></script>
+  </body>
+</html>

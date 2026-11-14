@@ -1,0 +1,119 @@
+/* ========== 6 bis. CONSEILS DE LA SEMAINE ========== */
+#semaine .card-title {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 18px;
+  color: var(--ink);
+}
+#semaine .note {
+  margin-top: 4px;
+}
+.btn-soft {
+  background: var(--g-l);
+  color: var(--g-d);
+}
+.btn-soft:hover:not(:disabled) {
+  background: var(--g-l2);
+}
+.week-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+.wd {
+  --c: var(--g);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--bg);
+  font-size: 13px;
+  color: var(--mut);
+  transition: transform 0.2s var(--ease), background 0.2s;
+}
+.wd:hover {
+  transform: translateY(-2px);
+  background: var(--g-l);
+}
+.wd.warning {
+  --c: var(--warn);
+}
+.wd.danger {
+  --c: var(--crit);
+}
+.wd-date {
+  font-weight: 600;
+  color: var(--ink);
+}
+.wd-state {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--c);
+  white-space: nowrap;
+}
+.wd.warning .wd-state {
+  color: var(--warn-d);
+}
+.wd.danger .wd-state {
+  color: var(--crit-d);
+}
+.wd-dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--c);
+}
+.wd-row b {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.week-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 16px 0 20px;
+}
+.week-kpis > div {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--g-l);
+}
+.week-kpis dt {
+  font-size: 12px;
+  color: var(--g-d);
+}
+.week-kpis dd {
+  margin-top: 2px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.week-advice {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.week-advice .alert-action {
+  font-size: 17px;
+}
+.alert-card.good .prio::before {
+  content: none;
+}
+.week-advice .prio::before {
+  content: none !important;
+}
+.week-advice .prio {
+  font-size: 0;
+}
+.week-advice .prio::after {
+  content: attr(data-label);
+  font-size: 12px;
+}
+

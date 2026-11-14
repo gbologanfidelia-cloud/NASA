@@ -1,0 +1,376 @@
+/* ========== ROTATION DES CULTURES ========== */
+.rot-flag {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--warn-l);
+  color: var(--warn-d);
+  font-size: 12px;
+  font-weight: 600;
+}
+.rot-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.rot-form select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink);
+  font: 500 14px "Inter", system-ui, sans-serif;
+}
+.rot-fs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.rot-fs legend {
+  padding: 0;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mut);
+}
+.rot-chks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.rot-chk {
+  position: relative;
+  display: inline-flex !important;
+  cursor: pointer;
+}
+.rot-chk input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  cursor: pointer;
+}
+.rot-chk span {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--mut);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+.rot-chk input:checked + span {
+  background: var(--g-l);
+  color: var(--g-d);
+  font-weight: 600;
+}
+.rot-chk input:focus-visible + span {
+  outline: 2px solid var(--g);
+  outline-offset: 2px;
+}
+.rot-erreur {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--warn-l);
+  color: var(--warn-d);
+  font-weight: 600;
+}
+.rot-reco {
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: var(--g-l);
+  color: var(--g-d);
+  font-size: 15px;
+}
+.rot-plans {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rot-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 22px;
+  padding: 22px;
+  border-radius: var(--r);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.rot-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-up);
+}
+.rot-card.best {
+  box-shadow: var(--shadow-up);
+}
+.rot-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.rot-letter {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--g-btn);
+  color: #fff;
+  font-weight: 700;
+}
+.rot-title h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+}
+.rot-title p {
+  font-size: 13px;
+  color: var(--mut);
+}
+.rot-best {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--g-l);
+  color: var(--g-d);
+  font-size: 12px;
+  font-weight: 700;
+}
+.rot-years {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  margin: 16px 0;
+}
+.rot-year {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--bg);
+  min-width: 0;
+}
+.ry-label {
+  font-size: 11px;
+  color: var(--mut);
+}
+.rot-year b {
+  font-size: 16px;
+}
+.ry-fam {
+  font-size: 11px;
+  color: var(--mut);
+}
+.rot-arrow {
+  align-self: center;
+  color: var(--mut);
+  font-size: 22px;
+}
+.rot-why {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+.rot-why li {
+  position: relative;
+  padding-left: 18px;
+}
+.rot-why li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--g);
+}
+.rot-side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.rot-total {
+  --c: var(--g);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rot-total b {
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--c);
+  font-variant-numeric: tabular-nums;
+}
+.rot-total span {
+  font-size: 12px;
+  color: var(--mut);
+  line-height: 1.3;
+}
+.rot-total.mid {
+  --c: var(--warn-d);
+}
+.rot-total.low {
+  --c: var(--crit-d);
+}
+.rot-scores {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rot-score {
+  --c: var(--g);
+  display: grid;
+  grid-template-columns: 112px 1fr 28px;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.rot-score.mid {
+  --c: var(--warn);
+}
+.rot-score.low {
+  --c: var(--crit);
+}
+.rs-bar {
+  display: block;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--track);
+  overflow: hidden;
+}
+.rs-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--c);
+  transition: width 0.4s var(--ease), background 0.3s;
+}
+.rot-score b {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.rot-base {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  color: var(--mut);
+}
+.rot-details {
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+.rot-details summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.rot-explain {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+  font-size: 14px;
+}
+.rot-explain ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: disc;
+  padding-left: 20px;
+}
+.table-wrap {
+  overflow-x: auto;
+}
+.rot-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.rot-table th,
+.rot-table td {
+  padding: 8px 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+.rot-table thead th {
+  color: var(--mut);
+  font-weight: 600;
+}
+.rot-table tbody tr:nth-child(odd) {
+  background: var(--bg);
+}
+.rot-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.rot-chart text {
+  font-size: 12px;
+  fill: var(--mut);
+}
+.rc-bar {
+  fill: var(--sat);
+  opacity: 0.85;
+}
+.rc-grid {
+  stroke: var(--line);
+}
+.rc-moy {
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-dasharray: 5 4;
+}
+.rot-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.rot-facts > div {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--bg);
+}
+.rot-facts dt {
+  font-size: 12px;
+  color: var(--mut);
+}
+.rot-facts dd {
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 600;
+}
+#rotation .section-head h2 {
+  font-size: 22px;
+}
+#rotation .card-title {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 16px;
+  color: var(--ink);
+}
+#rotation .sim-card .card-title {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 12px;
+  color: var(--mut);
+}
+

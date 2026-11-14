@@ -1,0 +1,103 @@
+/* ========== EN MOTS SIMPLES ========== */
+#simple .card-title {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 18px;
+  color: var(--ink);
+}
+#simple .note {
+  margin-top: 4px;
+  max-width: 70ch;
+}
+.simple-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.simple-row {
+  --c: var(--g);
+  --cl: var(--g-l);
+  --cd: var(--g-d);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 14px;
+  align-items: center;
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--cl);
+}
+.simple-row.warning {
+  --c: var(--warn);
+  --cl: var(--warn-l);
+  --cd: var(--warn-d);
+}
+.simple-row.danger {
+  --c: var(--crit);
+  --cl: var(--crit-l);
+  --cd: var(--crit-d);
+}
+.simple-row.info {
+  --c: var(--sat);
+  --cl: var(--info-l);
+  --cd: var(--info-d);
+}
+.simple-ic {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--c);
+  color: #fff;
+}
+.simple-ic .ic {
+  width: 26px;
+  height: 26px;
+}
+.simple-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.simple-name {
+  font-size: 18px;
+  font-weight: 700;
+}
+.simple-name small {
+  margin-left: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cd);
+}
+.simple-phrase {
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.simple-pill {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--cd);
+  font-size: 13px;
+  font-weight: 700;
+}
+.simple-todo {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: var(--g-btn);
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.45;
+}
+.simple-todo.warning {
+  background: var(--warn-solid);
+}
+.simple-todo.danger {
+  background: var(--crit-solid);
+}
+

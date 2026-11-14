@@ -1,0 +1,188 @@
+/* ========== 1. BASE ========== */
+:root {
+  --g: #16834a;
+  --g-d: #105c37;
+  --g-s: #55a96b;
+  --g-l: #e8f5ec;
+  --bg: #f5f7f5;
+  --card: #ffffff;
+  --ink: #26352d;
+  --mut: #5e6f65;
+  --line: #e1e8e3;
+  --warn: #e99a32;
+  --warn-d: #8f5504;
+  --warn-l: #fdf3e4;
+  --crit: #dc4c4c;
+  --crit-d: #a92a2a;
+  --crit-l: #fcecec;
+  --sat: #3f6e8c;
+  --g-btn: #16834a; /* fond des boutons verts (texte blanc) */
+  --g-hover: #105c37;
+  --g-l2: #d8eddf;
+  --warn-solid: #8f5504;
+  --crit-solid: #a92a2a;
+  --info-l: #e9f0f5;
+  --info-d: #2b5069;
+  --field: #dff1e5;
+  --map-bg: #f1f6f2;
+  --ctx: #e4ede6;
+  --ctx-line: #d2dfd5;
+  --chip: #f0f3f1;
+  --track: #edf1ee;
+  --track-2: #eef2ef;
+  --nav-bg: var(--nav-bg);
+  --tip-bg: #26352d;
+  --tip-fg: #ffffff;
+  --sh: 38, 53, 45;
+  color-scheme: light;
+  --r: 14px;
+  --shadow: 0 1px 2px rgba(var(--sh), 0.05), 0 4px 14px rgba(var(--sh), 0.04);
+  --shadow-up: 0 2px 4px rgba(var(--sh), 0.06), 0 10px 26px rgba(var(--sh), 0.08);
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ----- Mode sombre : activé par data-theme="dark" sur <html> (voir le script dans <head> et app.js) ----- */
+:root[data-theme="dark"] {
+  --g: #3dba78;
+  --g-d: #8fe0b0;
+  --g-l: #1b3326;
+  --g-l2: #234331;
+  --g-hover: #1d9d5a;
+  --bg: #0e1511;
+  --card: #16201a;
+  --ink: #e8f0ea;
+  --mut: #9aaea1;
+  --line: #26352d;
+  --warn-d: #f2b866;
+  --warn-l: #33260f;
+  --warn-solid: #a35f08;
+  --crit: #e66a6a;
+  --crit-d: #f29a9a;
+  --crit-l: #381b1d;
+  --crit-solid: #b03a3a;
+  --sat: #6aa5c9;
+  --info-l: #1a2a36;
+  --info-d: #9ccbe6;
+  --field: #1f3a2a;
+  --map-bg: #131d17;
+  --ctx: #1b2a21;
+  --ctx-line: #26382d;
+  --chip: #223028;
+  --track: #26352d;
+  --track-2: #1d2a23;
+  --nav-bg: rgba(22, 32, 26, 0.9);
+  --tip-bg: #e8f0ea;
+  --tip-fg: #0e1511;
+  --sh: 0, 0, 0;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+body {
+  transition: background-color 0.3s, color 0.3s;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 15px/1.55 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+p,
+ul,
+dl,
+dd {
+  margin: 0;
+}
+ul {
+  padding: 0;
+  list-style: none;
+}
+.wrap {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+main.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 48px;
+}
+.ic {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  background: var(--g-hover);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: top 0.2s;
+}
+.skip:focus {
+  top: 12px;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--g);
+  outline-offset: 2px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mut);
+}
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.note {
+  font-size: 13px;
+  color: var(--mut);
+}
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--g);
+  flex: none;
+}
+

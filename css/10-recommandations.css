@@ -1,0 +1,256 @@
+/* ========== 7. RECOMMANDATIONS ========== */
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.section-head h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.reco-grid {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.sim-card {
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.sim-card .card-title .ic {
+  color: var(--g);
+}
+.sim {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.sim label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+}
+.sim-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.sim output {
+  font-weight: 700;
+  color: var(--g-d);
+  font-variant-numeric: tabular-nums;
+}
+.sim input[type="range"] {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--line);
+  cursor: pointer;
+}
+.sim input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--g);
+  border: 3px solid var(--card);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+.sim input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--g);
+  border: 3px solid var(--card);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+.sim .chk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.sim .chk input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--g);
+}
+.alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.alert-card {
+  --c: var(--g);
+  --cl: var(--g-l);
+  --cd: var(--g-d);
+  position: relative;
+  padding: 22px;
+  background: var(--card);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.alert-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-up);
+}
+.alert-card.warning {
+  --c: var(--warn);
+  --cl: var(--warn-l);
+  --cd: var(--warn-d);
+}
+.alert-card.danger {
+  --c: var(--crit);
+  --cl: var(--crit-l);
+  --cd: var(--crit-d);
+}
+.alert-card.info {
+  --c: var(--sat);
+  --cl: var(--info-l);
+  --cd: var(--info-d);
+}
+.alert-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.alert-ic {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--cl);
+  color: var(--cd);
+  transition: background 0.3s, color 0.3s;
+}
+.alert-head-txt {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.alert-type {
+  font-size: 15px;
+  font-weight: 600;
+}
+.alert-time {
+  font-size: 12px;
+  color: var(--mut);
+}
+.prio {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--cl);
+  color: var(--cd);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.3s, color 0.3s;
+}
+.prio::before {
+  content: "Priorité basse";
+}
+.alert-card.warning .prio::before {
+  content: "Priorité moyenne";
+}
+.alert-card.danger .prio::before {
+  content: "Priorité haute";
+}
+.alert-card.info .prio::before {
+  content: "À planifier";
+}
+.alert-action {
+  margin-top: 16px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.gauge {
+  position: relative;
+  height: 8px;
+  margin-top: 16px;
+  border-radius: 4px;
+  background: var(--track);
+}
+.gauge i {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 4px;
+  background: var(--c);
+  transition: width 0.45s var(--ease), background 0.3s;
+}
+.gauge b {
+  position: absolute;
+  top: -4px;
+  width: 2px;
+  height: 16px;
+  background: var(--ink);
+  border-radius: 1px;
+}
+.gl {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--mut);
+}
+.why {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 14px;
+}
+.why li {
+  position: relative;
+  padding-left: 18px;
+}
+.why li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c);
+}
+.alert-reason {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--mut);
+}
+.alert-card.info .alert-action {
+  font-size: 18px;
+}
+.alert-card.info .alert-reason {
+  margin-top: 10px;
+}
+
+.footer {
+  padding: 24px 0 40px;
+  background: var(--card);
+  font-size: 13px;
+  color: var(--mut);
+}
+

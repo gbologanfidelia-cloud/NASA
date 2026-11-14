@@ -1,0 +1,78 @@
+/* ========== 3. ACCUEIL ========== */
+.hero {
+  padding-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.hero h1 {
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.lead {
+  margin-top: 8px;
+  max-width: 62ch;
+  color: var(--mut);
+  font-size: 16px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chips li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--ink);
+}
+.chips li .ic {
+  width: 15px;
+  height: 15px;
+  color: var(--g);
+}
+#sync-chip.live {
+  background: var(--g-l);
+  color: var(--g-d);
+}
+#sync-chip.loading .ic {
+  animation: spin 0.9s linear infinite;
+}
+
+.hero-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+.hero-top.has-visual {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+}
+.hero-visual {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--g-l);
+  box-shadow: var(--shadow-up);
+}
+.hero-visual svg,
+.hero-visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.hero-visual img {
+  object-fit: cover;
+}
+
