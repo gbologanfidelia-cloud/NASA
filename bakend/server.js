@@ -49,7 +49,7 @@ function genererDonneesSecours() {
 
 async function fetchNasaData() {
   const lat = 9.55;
-  const lon = 3.98;
+  const lon = 1.19; // Kara, Togo (même valeur que KARA dans js/config.js)
   
   const endDateObj = new Date();
   endDateObj.setDate(endDateObj.getDate() - 10); 
