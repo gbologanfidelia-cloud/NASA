@@ -2,9 +2,14 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // Render impose son propre port via process.env.PORT
 
 app.use(cors());
+
+// Route de test : ouvrir https://VOTRE-SERVICE.onrender.com/ pour vérifier que le serveur répond
+app.get('/', (req, res) => {
+  res.json({ ok: true, message: 'Backend Réact+ en ligne', route: '/api/nasa-data' });
+});
 
 function formatDate(date) {
   const year = date.getFullYear();
@@ -102,6 +107,6 @@ app.get('/api/nasa-data', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Serveur backend démarré sur http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Serveur backend démarré sur le port ${PORT}`);
 });
