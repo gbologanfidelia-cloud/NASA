@@ -106,6 +106,9 @@ function demarrer() {
   afficherTout();
   activerApparitions();
   activerNavigation();
+
+  // Chargement automatique des données NASA au démarrage (le bouton #live permet de réessayer)
+  if (typeof chargerNasa === "function") chargerNasa();
 }
 
 document.documentElement.classList.add("js");
