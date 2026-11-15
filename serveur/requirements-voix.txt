@@ -1,0 +1,6 @@
+# Uniquement pour la synthèse vocale ewé (modèle facebook/mms-tts-ewe) et l'import de l'Excel
+torch
+transformers
+numpy
+pandas
+openpyxl
